@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<head>
+	<!---This is a web page that fetches a random coctail photo.--->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<style type="text/css">	
+
+	body{
+		background-image: url(iu.jpg);
+		align-self: center;
+	}
+	h1{
+		align-self: center;
+		text-align: center;
+		color: white;
+	}
+
+	img{
+		margin: 10px auto;
+		width:400px;
+		height: auto;
+		display: block;
+	}
+
+	button{
+		text-align: center;
+	}
+
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+	<h1>What Coctail Should You Try Tonight?</h1>
+
+
+	<img id='cocktail'></img>
+
+	<script type="text/javascript">
+
+		const img = document.getElementById('cocktail');
+		const p = document.getElementById('name');
+		const api = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+		fetch(api)
+
+		.then(function(response){
+			let data = response.json();
+			console.log(data);
+			return data;
+	})
+
+		.then(function(data){
+
+		let cocktail_url = data.drinks["0"]["strDrinkThumb"];
+		console.log(cocktail_url);
+		return cocktail_url;
+
+	})
+
+		.then(function(cocktail_url){
+			img.src = cocktail_url;
+		})
+
+	
+
+</script>
+
+		<button value="Refresh Page" onClick="window.location.reload()">Click for another cocktail</button>
+</body>
